@@ -75,6 +75,13 @@ NS_ASSUME_NONNULL_BEGIN
         return;  
 
     WKWebView *wkWebView = (WKWebView *) self.webView; 
+ 
+ // Enable fullscreen on iPhone X
+ 	#if __IPHONE_OS_VERSION_MAX_ALLOWED >= 110000
+ 	if (@available(iOS 11.0, *)) {
+ 		[wkWebView.scrollView setContentInsetAdjustmentBehavior:UIScrollViewContentInsetAdjustmentNever];
+ 	}
+ 	#endif
 
     // added : allowFileAccessFromFileURLs  allowUniversalAccessFromFileURLs
     NSString *value = [self.commandDelegate.settings cdvwkStringForKey:@"allowfileaccessfromfileurls"];   
